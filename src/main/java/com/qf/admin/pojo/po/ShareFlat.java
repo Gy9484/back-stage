@@ -4,5 +4,6 @@ public class ShareFlat {
     private int id;
     private String name;
     private String pwd;
+    private int age;
 
 }
