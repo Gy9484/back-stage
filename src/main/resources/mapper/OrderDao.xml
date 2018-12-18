@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.admin.dao.OrderDao">
+ <select id="listoroder" resultType="com.qf.admin.pojo.po.Order">
+     select *
+     from orderfrom
+     <where>
+         <if test="search!=null and search!='' ">
+             tenementname like '%${search}%'
+         </if>
+     </where>
+     limit #{offset},#{limit}
+ </select>
+    <select id="countroder" resultType="_long">
+        select count(1)
+        from orderfrom
+        <where>
+            <if test="search!=null and search!='' ">
+                tenementname like '%${search}%'
+            </if>
+        </where>
+    </select>
+    <select id="singleroder" resultType="com.qf.admin.pojo.po.Order">
+        select *
+        from orderfrom
+        where orderId=#{orderId }
+    </select>
+    <update id="updateorder" parameterType="com.qf.admin.pojo.po.Order">
+--      UPDATE orderfrom SET orderNo=1,tenementname=1,tenementserial=1,phone=1 WHERE orderId=1
+        update orderfrom set orderNo=#{orderNo},tenementname=#{tenementname},tenementserial=#{tenementserial},phone=#{phone} where orderId=#{orderId}
+    </update>
+    <delete id="deleteroder" parameterType="_int">
+        delete from orderfrom where orderId=#{orderId}
+    </delete>
+</mapper>

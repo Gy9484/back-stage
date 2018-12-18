@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="assets/vendor/chartist/css/chartist-custom.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" href="assets/css/demo.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%--表格控件css--%>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
+    <%--时间控件css--%>
+    <link rel="stylesheet"
+          href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+</head>
+
+<body>
+
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="brand">
+            <a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo"
+                                      class="img-responsive logo"></a>
+        </div>
+        <div class="container-fluid">
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav>
+                <ul class="nav">
+                    <li><a href="index.html" class="active"><i class="lnr lnr-file-empty"></i> <span>用户信息</span></a>
+                    </li>
+                    <li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>业主信息</span></a></li>
+                    <!--<li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>用户信息</span></a></li>-->
+                    <!--<li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>房屋分类</span></a></li>-->
+                    <li><a href="orders" class=""><i class="lnr lnr-alarm"></i> <span>订单情况 </span></a></li>
+                    <li>
+                        <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-home"></i> <span>租赁分类</span>
+                            <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="subPages" class="collapse ">
+                            <ul class="nav">
+                                <li><a href="page-profile.html" class="">整租</a></li>
+                                <li><a href="page-login.html" class="">月租</a></li>
+                                <li><a href="page-lockscreen.html" class="">合租</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--<li><a href="tables.html" class=""><i class="lnr lnr-dice"></i> <span>Tables</span></a></li>-->
+                    <!--<li><a href="typography.html" class=""><i class="lnr lnr-text-format"></i> <span>Typography</span></a></li>-->
+                    <!--<li><a href="icons.html" class=""><i class="lnr lnr-linearicons"></i> <span>Icons</span></a></li> -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid" style="background-color: white">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- TABLE STRIPED -->
+                            <div class="">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">订单表单</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table id="table" class="table"></table>
+                                    <!-- 按钮触发模态框 -->
+                                    <!-- 模态框（Modal） -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <form action="updateorder" method="post">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">修改订单信息</h4>
+                                                </div>
+                                                <input name="orderId" type="hidden">
+                                                <div class="modal-body">订单号：<input type="text" name="orderNo" class="form-control"></div>
+                                                <div class="modal-body">房屋地址：<input type="text" name="tenementname" class="form-control"></div>
+                                                <div class="modal-body">房屋编号：<input type="text" name="tenementserial" class="form-control"></div>
+                                                <div class="modal-body">手机号码：<input type="text" name="phone" class="form-control"></div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">提交更改</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+                                                </div>
+
+                                            </div><!-- /.modal-content -->
+                                            </form>
+                                        </div><!-- /.modal -->
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- END TABLE STRIPED -->
+                        </div>
+
+
+                    </div>
+                    <!-- END OVERVIEW -->
+                    <!-- END MAIN -->
+                    <div class="clearfix"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+<script src="assets/scripts/klorofil-common.js"></script>
+<!--<%&#45;&#45;jquery库&#45;&#45;%>-->
+<!--<%&#45;&#45;bootstrap-table库&#45;&#45;%>-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+<!--<%&#45;&#45;bootstrap-table中文库&#45;&#45;%>-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<!--<%&#45;&#45;时间控件js&#45;&#45;%>-->
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+<!--<%&#45;&#45;时间控件库&#45;&#45;%>-->
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+    $(function () {
+        // 添加2个按钮
+        function  addButton(){
+        return[
+           ' <button id="btnupdate" type="button" class="btn btn-primary">确认</button>',
+            '<button id="btndelete" type="button" class="btn btn-danger">删除</button>'
+        ].join("&nbsp;&nbsp;&nbsp;")
+        }
+        window.btnaffair = {
+            "click #btnupdate" :function (e,v,r,i) {
+                    console.log(r.orderId);
+                    $.get(
+                        "singleroder"+r.orderId,
+                        function (data) {
+                            $('#myModal [name=orderId]').val(data.orderId);
+                            $('#myModal [name=orderNo]').val(data.orderNo);
+                            $('#myModal [name=tenementname]').val(data.tenementname);
+                            $('#myModal [name=tenementserial]').val(data.tenementserial);
+                            $('#myModal [name=phone]').val(data.phone);
+                        },
+                        'json'
+                    );
+                 var d = $('#myModal').modal({
+                     backdrop:'static',
+                     keyboard:false
+                 });
+                    d.modal(show);
+                 },
+            "click #btndelete" :function (e,v,r,i) {
+                $.post(
+                    "deleteroder/" + r.orderId,
+
+                    function (data) {
+                        if(data>0){
+                            $('table').bootstrapTable(('refresh'),{pageNumber:1})
+                        }
+                    },
+                    'json'
+                );
+                console.log("delete")
+            }
+        };
+    //    初始化表格
+        $('table').bootstrapTable({
+            url:'orders',
+            columns:[{
+                field:'orderId',
+                title:'编号'
+            },{
+                field:'orderNo',
+                title:'订单号'
+            },{
+                field:'tenementname',
+                title:'房屋地址'
+            },{
+                field:'tenementserial',
+                title:'房屋编号'
+            },{
+                field:'phone',
+                title:'手机号码'
+            },{
+                field:'button',
+                title:'操作',
+                formatter:addButton,
+                events:btnaffair
+            }],
+            method:'post',
+            //查询
+            search:true,
+            // 查询按下回车时
+            searchOnEnterKey:true,
+            // 分页
+            // 当前第几页
+            pageNumber: 1,
+            // 当前显示的条数
+            pageSize: 5,
+            pageList: [5, 10],
+            pagination:true,
+            sidePagination:'server',
+
+
+        });
+
+    });
+</script>
+</body>
+
+</html>
