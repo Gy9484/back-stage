@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <%--表格控件css--%>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/vendor/linearicons/style.css">
     <link rel="stylesheet" href="assets/vendor/chartist/css/chartist-custom.css">
@@ -69,18 +71,73 @@
     <!-- MAIN -->
     <div class="main">
         <!-- MAIN CONTENT -->
-        <table class="table" ></table>
+        <table id="table" class="table" ></table>
     </div>
 </div>
 <!-- END WRAPPER -->
 <!-- Javascript -->
 <script src="assets/vendor/jquery/jquery.min.js"></script>
 <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+<%--bootstrap-table中文库--%>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
 <script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 <!--<script src="assets/vendor/chartist/js/chartist.min.js"></script>-->
 <script src="assets/scripts/klorofil-common.js"></script>
-
+<script>
+    $(function(){
+        //初始化表格
+        $('#table').bootstrapTable({
+            //表格属性
+            url:'listMonthly',
+            columns:[{
+                checkbox: true
+            },{
+                //列属性
+                field:'id',
+                title:'编号'
+            },{
+                field:'name',
+                title:'描述'
+            },{
+                field:'monthlyRent',
+                title:'月租金'
+            },{
+                field:'area',
+                title:'建筑面积'
+            },{
+                field:'houseType',
+                title:'户型'
+            },{
+                field:'payType',
+                title:'付款'
+            },{
+                field:'orientation',
+                title:'朝向'
+            },{
+                field:'floor',
+                title:'楼层'
+            },{
+                field:'district',
+                title:'区域'
+            },{
+                field:'subway',
+                title:'地铁'
+            },{
+                field:'configuration',
+                title:'配置'
+            }],
+            method:'post',
+            search: true,
+            searchOnEnterKey: true,
+            pageNumber: 1,
+            pageSize: 5,
+            pagination: true,
+            sidePagination: 'server'
+        });
+    });
+</script>
 </body>
 
 </html>

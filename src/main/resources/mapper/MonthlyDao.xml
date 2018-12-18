@@ -3,5 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.admin.dao.MonthlyDao">
-
+    <select id="listMonthly" resultType="com.qf.admin.pojo.po.Monthly">
+        select id,name,monthly_rent as monthlyRent,area,house_type as houseType,pay_type as payType,orientation,floor,district,subway,configuration from monthly
+        <where>
+            <if test="search !=null and search != ''">
+                name like '%${search}%'
+            </if>
+        </where>
+        limit #{offset},#{limit}
+    </select>
+    <select id="countMonthly" resultType="_long">
+        select count(*) from monthly
+        <where>
+            <if test="search != null and search != ''">
+                name like '%${search}%'
+            </if>
+        </where>
+    </select>
 </mapper>
