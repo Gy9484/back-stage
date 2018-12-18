@@ -19,15 +19,24 @@ public class MonthlyAction {
     public String monthly(){
         return "monthly";
     }
-    @GetMapping(value = "index")
-    public String index(){
-        return "index";
-    }
+
     @ResponseBody
     @RequestMapping(value = "/listMonthly",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     public Object listMonthly(@RequestBody JSONObject jsonObject){
         jsonObject = monthlyService.listMonthly(jsonObject);
         return jsonObject;
+    }
+    @ResponseBody
+    @GetMapping(value = "monthly/{id}")
+    public Monthly getMonthlyById(@PathVariable("id")String id){
+        return monthlyService.getMonthlyById(id);
+    }
+    @ResponseBody
+    @PostMapping(value = "/monthly")
+    public Boolean updateMonthlyById(Monthly monthly){
+        int i = monthlyService.updateMonthlyById(monthly);
+        Boolean b = (i>0)?true:false;
+        return b;
 
     }
 

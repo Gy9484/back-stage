@@ -9,4 +9,8 @@ public interface MonthlyDao {
     List<Monthly> listMonthly(JSONObject jsonObject);
 
     Long countMonthly(JSONObject jsonObject);
+
+    Monthly getMonthlyById(String id);
+
+    int updateMonthlyById(Monthly monthly);
 }

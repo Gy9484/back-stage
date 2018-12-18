@@ -50,9 +50,9 @@
                     <li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>业主信息</span></a></li>
                     <li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>订单情况 </span></a></li>
                     <li>
-                        <a href="#subPages" data-toggle="collapse" class="collapsed active"><i class="lnr lnr-home"></i> <span>租赁分类</span>
+                        <a href="#subPages" data-toggle="collapse" class="active" aria-expanded="true"><i class="lnr lnr-home"></i> <span>租赁分类</span>
                             <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-                        <div id="subPages" class="collapse ">
+                        <div id="subPages" class="collapse in" aria-expanded="true" >
                             <ul class="nav active">
                                 <li><a href="page-profile.html" class="">整租</a></li>
                                 <li><a href="monthly" class="active">月租</a></li>
@@ -72,6 +72,70 @@
     <div class="main">
         <!-- MAIN CONTENT -->
         <table id="table" class="table" ></table>
+        <!--<%&#45;&#45;编辑模态框开始&#45;&#45;%>-->
+        <div class="modal fade" id="editModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--<%&#45;&#45;模态框头部&#45;&#45;%>-->
+                    <div class="modal-header">
+                        <h4 class="modal-title">编辑月租房</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!--<%&#45;&#45;模态框主体&#45;&#45;%>-->
+                    <div class="modal-body">
+                        <form id="editForm">
+                            <input type="hidden" name="id"/>
+                            <div class="form-group">
+                                <label class="control-label">描述</label>
+                                <input name="name" class="form-control" type="text" placeholder="请填入用户名">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">月租金</label>
+                                <input class="form-control"  type="text" name="monthlyRent">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">建筑面积</label>
+                                <input class="form-control"  type="text" name="area">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">户型</label>
+                                <input class="form-control"  type="text" name="houseType">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">付款</label>
+                                <input class="form-control"  type="text" name="payType">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">朝向</label>
+                                <input class="form-control"  type="text" name="orientation">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">楼层</label>
+                                <input class="form-control"  type="text" name="floor">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">区域</label>
+                                <input class="form-control"  type="text" name="district">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">地铁</label>
+                                <input class="form-control" type="text" name="subway">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">配置</label>
+                                <input class="form-control"  type="text" name="configuration">
+                            </div>
+                        </form>
+                    </div>
+                    <!--<%&#45;&#45;模态框底部&#45;&#45;%>-->
+                    <div class="modal-footer">
+                        <button id="btnEditCommit" type="button" class="btn btn-primary">更改</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- END WRAPPER -->
@@ -87,6 +151,59 @@
 <script src="assets/scripts/klorofil-common.js"></script>
 <script>
     $(function(){
+        function addButton(){
+            return [
+                '<button id="btnEdit" class="btn btn-primary" onclick="fn()">编辑</button>&nbsp;&nbsp;&nbsp;&nbsp;',
+                '<button id="btnDelete" class="btn btn-danger">删除</button>'
+            ].join("");
+        }
+        window.operateEvents={
+            "click #btnEdit":function (e,v,r,i) {
+                $.get(
+                    'monthly/'+r.id,
+                    function (data) {
+                        $("#editForm [name=id]").val(data.id);
+                        $("#editForm [name=name]").val(data.name);
+                        $("#editForm [name=monthlyRent]").val(data.monthlyRent);
+                        $("#editForm [name=area]").val(data.area);
+                        $("#editForm [name=houseType]").val(data.houseType);
+                        $("#editForm [name=payType]").val(data.payType);
+                        $("#editForm [name=orientation]").val(data.orientation);
+                        $("#editForm [name=floor]").val(data.floor);
+                        $("#editForm [name=district]").val(data.district);
+                        $("#editForm [name=subway]").val(data.subway);
+                        $("#editForm [name=configuration]").val(data.configuration);
+                    },
+                    'json'
+                );
+                $("#editModal").modal({
+                    backdrop:'static',
+                    keyboard: false
+                }).modal('show')
+            }
+        };
+        function fn(){
+            $.post(
+                'monthly',
+                {
+                    id:$('#editForm [name=id]').val(),
+                    name:$('#editForm [name=name]').val(),
+                    monthlyRent:$('#editForm [name=monthlyType]').val(),
+                    area:$('#editForm [name=area]').val(),
+                    houseType:$('#editForm [name=houseType]').val(),
+                    payType:$('#editForm [name=payType]').val(),
+                    orientation:$('#editForm [name=orientation]').val(),
+                    floor:$('#editForm [name=floor]').val(),
+                    district:$('#editForm [name=district]').val(),
+                    subway:$('#editForm [name=subway]').val(),
+                    configuration:$('#editForm [name=configuration]').val()
+                },
+                function (data) {
+                    window.reload(true);
+                },
+                'json'
+            )
+        };
         //初始化表格
         $('#table').bootstrapTable({
             //表格属性
@@ -96,16 +213,19 @@
             },{
                 //列属性
                 field:'id',
-                title:'编号'
+                title:'编号',
+                sortable:true
             },{
                 field:'name',
                 title:'描述'
             },{
                 field:'monthlyRent',
-                title:'月租金'
+                title:'月租金',
+                sortable:true
             },{
                 field:'area',
-                title:'建筑面积'
+                title:'建筑面积',
+                sortable:true
             },{
                 field:'houseType',
                 title:'户型'
@@ -127,7 +247,15 @@
             },{
                 field:'configuration',
                 title:'配置'
-            }],
+            }
+            ,{
+                field:'button',
+                title:'操作',
+                formatter: addButton,
+                events: operateEvents
+            }
+            ],
+
             method:'post',
             search: true,
             searchOnEnterKey: true,

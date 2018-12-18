@@ -10,14 +10,24 @@
                 name like '%${search}%'
             </if>
         </where>
+        <if test="sort != null">
+            order by ${sort} ${order}
+        </if>
         limit #{offset},#{limit}
     </select>
     <select id="countMonthly" resultType="_long">
-        select count(*) from monthly
+        select count(1) from monthly
         <where>
             <if test="search != null and search != ''">
                 name like '%${search}%'
             </if>
         </where>
     </select>
+    <select id="getMonthlyById" resultType="com.qf.admin.pojo.po.Monthly">
+        select id,name,monthly_rent as monthlyRent,area,house_type as houseType,pay_type as payType,orientation,floor,district,subway,configuration from monthly
+        where id = #{id}
+    </select>
+    <update id="updateMonthlyById" parameterType="com.qf.admin.pojo.po.Monthly">
+        update monthly set name = #{name},monthly_rent =#{monthlyRent},area =#{area},house_type=#{houseType},pay_type=#{payType},orientation=#{orientation},floor=#{floor},district=#{district},subway=#{subway},configuration=#{configuration} where id=#{id}
+    </update>
 </mapper>

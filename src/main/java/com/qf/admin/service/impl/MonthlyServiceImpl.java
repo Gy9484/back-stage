@@ -23,4 +23,14 @@ public class MonthlyServiceImpl implements MonthlyService {
         jo.put("rows",rows);
         return jo;
     }
+
+    @Override
+    public Monthly getMonthlyById(String id) {
+       return monthlyDao.getMonthlyById(id);
+    }
+
+    @Override
+    public int updateMonthlyById(Monthly monthly) {
+        return monthlyDao.updateMonthlyById(monthly);
+    }
 }

@@ -8,4 +8,7 @@ import java.util.List;
 public interface MonthlyService {
     JSONObject listMonthly(JSONObject jsonObject);
 
+    Monthly getMonthlyById(String id);
+
+    int updateMonthlyById(Monthly monthly);
 }
