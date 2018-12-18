@@ -1,0 +1,9 @@
+package com.qf.admin.dao;
+
+import com.qf.admin.pojo.po.Monthly;
+
+import java.util.List;
+
+public interface MonthlyDao {
+    List<Monthly> listMonthly();
+}
