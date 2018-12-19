@@ -22,12 +22,6 @@
     <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.js"></script>
-
-    <!-- Latest compiled and minified Locales -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/locale/bootstrap-table-zh-CN.min.js"></script>
 </head>
 
 <body>
@@ -95,7 +89,7 @@
                                     <h3 class="panel-title">合租管理</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <table class="table table-hover table-bordered">
+                                    <table id="table" class="table table-hover table-bordered">
 
                                     </table>
                                 </div>
@@ -121,6 +115,74 @@
 <script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 <!--<script src="assets/vendor/chartist/js/chartist.min.js"></script>-->
 <script src="assets/scripts/klorofil-common.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/bootstrap-table.min.js"></script>
+
+<!-- Latest compiled and minified Locales -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.2/locale/bootstrap-table-zh-CN.min.js"></script>
+<script >
+    $(function () {
+        $('#table').bootstrapTable({
+            url: 'shareFlats',
+            method: 'post',
+            cache: false,
+            pagination: true,
+            sidePagination: "server",
+            pageNumber: 1,
+            pageSize: 5,
+            pageList: [2, 3, 5, 10],
+            search: true,
+            searchOnEnterKey: true,
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'tid',
+                title: '序号',
+                sortable: true
+            }, {
+                field: 'tname',
+                title: '租房信息'
+            }, {
+                field: 'price',
+                title: '月租金',
+                sortable: true
+            }, {
+                field: 'area',
+                title: '面积',
+                sortable: true
+            }, {
+                field: 'type',
+                title: '户型'
+            }, {
+                field: 'floor',
+                title: '楼层'
+            }, {
+                field: 'address',
+                title: '地址'
+            }, {
+                field: 'subway',
+                title: '地铁'
+            }, {
+                field: 'single_bathroom',
+                title: '独卫',
+                formatter: boleeanFormatter
+            }, {
+                field: 'shower',
+                title: '淋浴',
+                formatter: boleeanFormatter
+            }, {
+                field:'balcony',
+                title: '阳台',
+                formatter: boleeanFormatter
+            } ]
+        });
+        function boleeanFormatter(value) {
+            if (value == 0) { value = '无'; }
+            else if (value == 1) { value = '有'; }
+            return  value ;
+        }
+    });
+</script>
 </body>
 
 </html>

@@ -4,11 +4,21 @@ public class ShareFlat {
     private String tid;
     private String tname;
     private double price;
+    private double area;
+
+    public double getArea() {
+        return area;
+    }
+
+    public void setArea(double area) {
+        this.area = area;
+    }
+
     private String type;
     private String floor;
     private String address;
     private String subway;
-    private int single_bathrooom;
+    private int single_bathroom;
     private int shower;
     private int balcony;
 
@@ -18,11 +28,12 @@ public class ShareFlat {
                 "tid='" + tid + '\'' +
                 ", tname='" + tname + '\'' +
                 ", price=" + price +
+                ", area=" + area +
                 ", type='" + type + '\'' +
                 ", floor='" + floor + '\'' +
                 ", address='" + address + '\'' +
                 ", subway='" + subway + '\'' +
-                ", single_bathrooom=" + single_bathrooom +
+                ", single_bathroom=" + single_bathroom +
                 ", shower=" + shower +
                 ", balcony=" + balcony +
                 '}';
@@ -84,12 +95,12 @@ public class ShareFlat {
         this.subway = subway;
     }
 
-    public int getSingle_bathrooom() {
-        return single_bathrooom;
+    public int getSingle_bathroom() {
+        return single_bathroom;
     }
 
-    public void setSingle_bathrooom(int single_bathrooom) {
-        this.single_bathrooom = single_bathrooom;
+    public void setSingle_bathroom(int single_bathroom) {
+        this.single_bathroom = single_bathroom;
     }
 
     public int getShower() {
